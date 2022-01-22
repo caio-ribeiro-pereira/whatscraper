@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "name": "Whatscraper",
+  "description": "Scraps contacts data from web whatsapp",
+  "version": "1.0",
+  "browser_action": {
+    "default_title": "Whatscraper",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": ["storage", "activeTab", "tabs", "scripting"]
+}

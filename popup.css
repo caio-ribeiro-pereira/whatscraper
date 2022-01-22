@@ -1,0 +1,43 @@
+body {
+  width: 320px;
+}
+
+header {
+  text-align:center;
+  margin: 0 auto;
+  padding: 30px;
+  display: block;
+}
+
+main {
+  padding: 5px;
+  margin: 0 auto;
+  display: block;
+}
+
+button {
+  padding: 10px 20px;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+}
+
+li {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+li aside {
+  padding-top: 20px;
+}
+
+li img {
+  width: 64px;
+  height: 64px;
+  margin-right: 10px;
+}
