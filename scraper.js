@@ -1,7 +1,12 @@
-const chatListEl = Array.from(document.querySelectorAll('#pane-side > div > div > div[role="grid"] > div'));
-const output = chatListEl.map(c => {
-  const imageEl = c.querySelector('div[role="row"] img');
-  const titleEl = c.querySelector('div[role="row"] span[dir="auto"]');
+const CHAT_LIST_PATH = '#pane-side > div > div > div[role="grid"] > div';
+const IMAGE_PATH = 'div[role="row"] img';
+const TITLE_PATH = 'div[role="row"] span[dir="auto"]';
+
+const chatListEl = document.querySelectorAll(CHAT_LIST_PATH);
+
+const output = Array.from(chatListEl || []).map((c) => {
+  const imageEl = c.querySelector(IMAGE_PATH);
+  const titleEl = c.querySelector(TITLE_PATH);
   const name = titleEl.textContent;
   const image = imageEl.src;
   const query = new URLSearchParams(image);
