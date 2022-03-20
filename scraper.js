@@ -2,20 +2,21 @@ function scrapData(mainEl) {
   const imageEl = mainEl.querySelector('#main > header > div > div > img');
   const nameEl = mainEl.querySelector('#main > header > div > div > div > span[dir="auto"]');
   const chatEls = mainEl.querySelectorAll('#main div[role="region"] > div');
-  console.log(chatEls);
   const messageInEl = Array.from(chatEls).find((chatEl) => chatEl.className.includes('message-in'));
-  // TODO Melhorar scraping quando nao tem message-in
   if (messageInEl) {
     const chatDataId = messageInEl.getAttribute('data-id') || '';
     const chatType = chatDataId.includes('@g.us') ? 'grupo' : 'contato';
     const isContact = chatType === 'contato';
+    const phone = isContact ? `+${chatDataId.split('@')[0].replace(/[\D]+/g, '')}` : '---';
     const output = {
-      image: imageEl.src,
-      name: nameEl.textContent,
       chatType,
-      phone: isContact ? `+${chatDataId.split('@')[0].replace(/[\D]+/g, '')}` : '---'
+      phone,
+      image: imageEl.src,
+      name: nameEl.textContent
     };
-    chrome.storage.sync.set({ output });
+    chrome.storage.sync.set({ output, loading: false });
+  } else {
+    chrome.storage.sync.set({ output: null, loading: false });
   }
 }
 
@@ -29,7 +30,10 @@ function start() {
       console.log(`Observando tag ${selector}`);
       scrapData(app.parentNode);
       observer = new MutationObserver((mutations) => {
-        scrapData(mutations[0].target);
+        chrome.storage.sync.set({ loading: true });
+        setTimeout(() => {
+          scrapData(mutations[0].target);
+        }, 500);
       });
       // app.parentNode pois a div acima da #main gera id dinamico
       observer.observe(app.parentNode, { childList: true });

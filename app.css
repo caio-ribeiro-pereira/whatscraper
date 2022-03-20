@@ -20,12 +20,7 @@ button {
   padding: 10px 20px;
 }
 
-ul {
-  display: flex;
-  flex-direction: column;
-}
-
-li {
+#output {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -33,11 +28,17 @@ li {
   margin-bottom: 10px;
 }
 
-li aside {
+#output aside {
   padding-top: 20px;
 }
 
-li img {
+#output h3 {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+#output img {
   width: 64px;
   height: 64px;
   margin-right: 10px;
